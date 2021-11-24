@@ -3,4 +3,4 @@ project(GraphModuleC__)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(GraphModuleC__ main.cpp)
+add_executable(GraphModuleC__ main.cpp AdjList.cpp AdjList.h)
