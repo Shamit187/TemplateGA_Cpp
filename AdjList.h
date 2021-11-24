@@ -15,7 +15,7 @@ private:
     const bool isDirected;
 
 public:
-    AdjList(bool isDirected, unsigned nodeNumber, unsigned edgeNumber, unsigned** edgeList);
+    AdjList(bool isDirected, unsigned nodeNumber, unsigned edgeNumber, std::vector<std::vector<unsigned>> edgeList);
 
     virtual ~AdjList();
 };

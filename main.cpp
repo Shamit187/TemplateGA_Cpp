@@ -2,23 +2,22 @@
 #include "AdjList.h"
 
 int main() {
-    //input module for no wt
+
+    /* input module for no wt */
     /*
     int nodeNumber;
     int edgeNumber;
 
-    unsigned ** edgeList;
+    std::vector<std::vector<unsigned>> edgeList;
     std::cin >> nodeNumber >> edgeNumber;
-    edgeList = new unsigned*[nodeNumber];
+    edgeList.resize(edgeNumber, std::vector<unsigned>(2));
 
     for(int i = 0; i < edgeNumber; i++) {
-        edgeList[i] = new unsigned [2];
         std::cin >> edgeList[i][0] >> edgeList[i][1];
     }
 
     AdjList graph(true, nodeNumber, edgeNumber, edgeList);
-    delete edgeList;
-     */
+    */
 
     return 0;
 }

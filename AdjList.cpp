@@ -4,7 +4,7 @@
 
 #include "AdjList.h"
 
-AdjList::AdjList(bool isDirected, unsigned nodeNumber, unsigned edgeNumber, unsigned** edgeList)
+AdjList::AdjList(bool isDirected, unsigned nodeNumber, unsigned edgeNumber, std::vector<std::vector<unsigned>> edgeList)
 : nodeNumber(nodeNumber), edgeNumber(edgeNumber), isDirected(isDirected) {
     adjList.resize(nodeNumber, std::vector<unsigned>(0));
 
