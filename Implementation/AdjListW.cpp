@@ -1,7 +1,7 @@
 //
 // Created by User on 11/25/2021.
 //
-#include "AdjListW.h"
+#include "../HeaderFiles/AdjListW.h"
 
 AdjListW::AdjListW(bool isDirected, unsigned int nodeNumber, unsigned int edgeNumber, std::vector<std::vector<double>> edgeList)
 : isDirected(isDirected),nodeNumber(nodeNumber),edgeNumber(edgeNumber) {

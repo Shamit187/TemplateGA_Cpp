@@ -2,7 +2,7 @@
 // Created by User on 11/24/2021.
 //
 
-#include "AdjList.h"
+#include "../HeaderFiles/AdjList.h"
 
 AdjList::AdjList(bool isDirected, unsigned nodeNumber, unsigned edgeNumber, std::vector<std::vector<unsigned>> edgeList)
 : nodeNumber(nodeNumber), edgeNumber(edgeNumber), isDirected(isDirected) {

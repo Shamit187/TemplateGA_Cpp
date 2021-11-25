@@ -1,6 +1,6 @@
 #include <iostream>
-#include "AdjList.h"
-#include "AdjListW.h"
+#include "HeaderFiles/AdjList.h"
+#include "HeaderFiles/AdjListW.h"
 #include <fstream>
 
 int main() {
@@ -56,7 +56,7 @@ int main() {
 
     /* input module from file*/
     std::ifstream readableFile;
-    readableFile.open("../Graph_input_wt.txt");
+    readableFile.open("../Input/Graph_input_wt.txt");
     if (!readableFile) {
         std::cout << "Unable to open file";
         exit(1); // terminate with error
