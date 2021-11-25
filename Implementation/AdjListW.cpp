@@ -55,3 +55,61 @@ std::vector<int> AdjListW::BFS(unsigned int source, int returnType) {
         return std::vector<int>(0);
     }
 }
+
+std::vector<int> AdjListW::DFS(unsigned int source, int returnType) {
+    std::stack<int> vertexStack;
+
+    std::vector<int> color;
+    color.resize(nodeNumber, ADJLST_WHITE);
+
+    std::vector<int> discover;
+    discover.resize(nodeNumber, 0);
+
+    std::vector<int> finish;
+    finish.resize(nodeNumber, 0);
+
+    std::vector<int> parent;
+    parent.resize(nodeNumber, ADJLST_INF);
+
+    int time = 0;
+
+    vertexStack.push(source);
+    color[source] = ADJLST_GRAY;
+    discover[source] = ++time;
+
+    while(!vertexStack.empty()){
+        int v = vertexStack.top(); vertexStack.pop();
+
+        if (color[v] == ADJLST_GRAY){
+
+            color[v] = ADJLST_GREEN;
+            vertexStack.push(v);
+
+            for(auto u: adjList[v]){
+                if(color[u.destination] == ADJLST_WHITE){
+                    color[u.destination] = ADJLST_GRAY;
+                    discover[u.destination] = ++time;
+                    vertexStack.push(u.destination);
+                    parent[u.destination] = v;
+                }
+            }
+
+        }else if(color[v] == ADJLST_GREEN){
+            color[v] = ADJLST_BLACK;
+            finish[v] = ++time;
+        }
+    }
+
+    switch (returnType) {
+        case ADJLST_COLOR:
+            return color;
+        case ADJLST_DISCOVER:
+            return discover;
+        case ADJLST_FINISH:
+            return finish;
+        case ADJLST_PARENT:
+            return parent;
+        default:
+            return std::vector<int>(0);
+    }
+}
