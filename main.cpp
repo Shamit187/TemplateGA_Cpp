@@ -19,6 +19,7 @@ int main() {
     */
 
     /* input module from file no wt*/
+    /*
     std::ifstream readableFile;
     readableFile.open("../Graph_input.txt");
     if (!readableFile) {
@@ -38,13 +39,19 @@ int main() {
     readableFile.close();
 
     AdjList graph(true, nodeNumber, edgeNumber, edgeList);
-    //std::cout << graph;
-    //std::cout << graph.bfsTree(0);
+    std::cout << graph;
+    std::cout << graph.bfsTree(0);
     std::vector<AdjList> Forrest = graph.bfsForrest();
     for(auto &tree : Forrest){
         std::cout << tree << std::endl;
     }
-
+    try{
+        std::cout << graph.bfsDistance(0, 16);
+    }catch (NotConnectedException& e){
+        std::cout << "Error!!!" << std::endl;
+        std::cout << e.what() << std::endl;
+    }
+    */
 
     return 0;
 }

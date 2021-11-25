@@ -8,6 +8,7 @@
 #include <vector>
 #include <queue>
 #include <ostream>
+#include <exception>
 
 #define ADJLNW_WHITE 0
 #define ADJLNW_GRAY 1
@@ -17,6 +18,13 @@
 #define ADJLNW_DISTANCE 0
 #define ADJLNW_PARENT 1
 #define ADJLNW_COLOR 2
+
+struct NotConnectedException: public std::exception{
+    const char * what () const throw()
+    {
+        return "Vertices aren't connected";
+    }
+};
 
 class AdjList {
 private:

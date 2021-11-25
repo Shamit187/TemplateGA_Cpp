@@ -120,7 +120,9 @@ std::vector<AdjList> AdjList::bfsForrest() {
 }
 
 unsigned AdjList::bfsDistance(unsigned int source, unsigned int destination) {
-    return 0;
+    int distance = bfs(source, ADJLNW_DISTANCE).at(destination);
+    if (distance == ADJLNW_INF) throw NotConnectedException();
+    return distance;
 }
 
 void AdjList::addEdge(unsigned int source, unsigned int destination) {
