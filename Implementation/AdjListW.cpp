@@ -16,3 +16,42 @@ AdjListW::AdjListW(bool isDirected, unsigned int nodeNumber, unsigned int edgeNu
         if(!isDirected) adjList[u].push_back(edge{u, v, wt});
     }
 }
+
+std::vector<int> AdjListW::BFS(unsigned int source, int returnType) {
+    std::vector<int> color;
+    color.resize(nodeNumber, ADJLST_WHITE);
+
+    std::vector<int> distance;
+    distance.resize(nodeNumber, ADJLST_INF);
+
+    std::vector<int> parent;
+    parent.resize(nodeNumber, ADJLST_INF);
+
+    color[source] = ADJLST_GRAY;
+    distance[source] = 0;
+
+    std::queue<int> queue;
+    queue.push(source);
+
+    while(!queue.empty()){
+        unsigned v = queue.front(); queue.pop();
+        for(auto u: adjList[v]){
+            if (color[u.destination] == ADJLST_WHITE){
+                color[u.destination] = ADJLST_GRAY;
+                distance[u.destination] = distance[v] + 1;
+                parent[u.destination] = v;
+                queue.push(u.destination);
+            }
+        }
+        color[v] = ADJLST_BLACK;
+    }
+    if(returnType == ADJLST_DISTANCE){
+        return distance;
+    }else if(returnType == ADJLST_PARENT){
+        return parent;
+    }else if(returnType == ADJLST_COLOR){
+        return color;
+    }else{
+        return std::vector<int>(0);
+    }
+}

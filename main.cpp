@@ -73,7 +73,12 @@ int main() {
     }
     readableFile.close();
 
-    AdjListW graph(false, nodeNumber, edgeNumber, edgeList);
+    AdjListW graph(true, nodeNumber, edgeNumber, edgeList);
+    std::vector<int> output = graph.BFS(0, ADJLST_COLOR);
+    for(auto i: output){
+        std::cout << i << " ";
+    }
+
 
     return 0;
 }

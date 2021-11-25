@@ -10,6 +10,16 @@
 #include <stack>
 #include <queue>
 
+#define ADJLST_WHITE 0
+#define ADJLST_GRAY 1
+#define ADJLST_BLACK 2
+
+#define ADJLST_INF -1
+
+#define ADJLST_DISTANCE 0
+#define ADJLST_PARENT 1
+#define ADJLST_COLOR 2
+
 struct edge{
     unsigned source;
     unsigned destination;
@@ -28,6 +38,11 @@ public:
 
     //constructor
     AdjListW(bool isDirected, unsigned int nodeNumber, unsigned int edgeNumber, std::vector<std::vector<double>> edgeList);
+
+    //BFS Algorithms
+    std::vector<int> BFS(unsigned source, int returnType);
+
+    //DFS Algorithms
 
 };
 
