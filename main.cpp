@@ -1,5 +1,6 @@
 #include <iostream>
 #include "AdjList.h"
+#include "AdjListW.h"
 #include <fstream>
 
 int main() {
@@ -52,6 +53,27 @@ int main() {
         std::cout << e.what() << std::endl;
     }
     */
+
+    /* input module from file*/
+    std::ifstream readableFile;
+    readableFile.open("../Graph_input_wt.txt");
+    if (!readableFile) {
+        std::cout << "Unable to open file";
+        exit(1); // terminate with error
+    }
+    int nodeNumber;
+    int edgeNumber;
+
+    std::vector<std::vector<double>> edgeList;
+    readableFile >> nodeNumber >> edgeNumber;
+    edgeList.resize(edgeNumber, std::vector<double>(3));
+
+    for(int i = 0; i < edgeNumber; i++) {
+        readableFile >> edgeList[i][0] >> edgeList[i][1] >> edgeList[i][2];
+    }
+    readableFile.close();
+
+    AdjListW graph(false, nodeNumber, edgeNumber, edgeList);
 
     return 0;
 }
