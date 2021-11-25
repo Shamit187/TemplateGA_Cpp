@@ -1,4 +1,4 @@
-# GraphModuleCpp__
+# TemplateGA_Cpp
 
 Basic Graph Algorithms
 
