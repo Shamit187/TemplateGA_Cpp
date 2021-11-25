@@ -85,9 +85,38 @@ AdjList AdjList::bfsTree(unsigned int source) {
     return BFSTree;
 }
 
-//Haven't written yet
-std::vector<AdjList> AdjList::bfsForrest(unsigned int source) {
-    return std::vector<AdjList>();
+//dumbest Algorithm to exist
+std::vector<AdjList> AdjList::bfsForrest() {
+    std::vector<AdjList> treeList;
+
+    std::vector<int> globalColor;
+    globalColor.resize(nodeNumber, ADJLNW_WHITE);
+
+    for(int i = 0; i < nodeNumber; i++){
+        if(globalColor[i] == ADJLNW_WHITE){
+            AdjList BFSTree(true, nodeNumber, 0, std::vector<std::vector<unsigned>>(0));
+
+            globalColor[i] = ADJLNW_GRAY;
+
+            std::queue<int> queue;
+            queue.push(i);
+
+            while(!queue.empty()){
+                unsigned v = queue.front(); queue.pop();
+                for(unsigned u: adjList[v]){
+                    if (globalColor[u] == ADJLNW_WHITE){
+                        globalColor[u] = ADJLNW_GRAY;
+                        BFSTree.addEdge(v, u);
+                        queue.push(u);
+                    }
+                }
+                globalColor[v] = ADJLNW_BLACK;
+            }
+            treeList.push_back(BFSTree);
+        }
+    }
+
+    return treeList;
 }
 
 unsigned AdjList::bfsDistance(unsigned int source, unsigned int destination) {

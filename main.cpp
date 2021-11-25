@@ -39,11 +39,12 @@ int main() {
 
     AdjList graph(true, nodeNumber, edgeNumber, edgeList);
     //std::cout << graph;
-    std::cout << graph.bfsTree(0);
-    std::vector<int>color = graph.bfs(0,ADJLNW_COLOR);
-    for(auto i: color){
-        std::cout << i << " ";
+    //std::cout << graph.bfsTree(0);
+    std::vector<AdjList> Forrest = graph.bfsForrest();
+    for(auto &tree : Forrest){
+        std::cout << tree << std::endl;
     }
+
 
     return 0;
 }

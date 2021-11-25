@@ -39,7 +39,7 @@ public:
     //BFS based algorithms
     std::vector<int> bfs(unsigned source, int returnType);
     AdjList bfsTree(unsigned source);
-    std::vector<AdjList> bfsForrest (unsigned source);
+    std::vector<AdjList> bfsForrest ();
     unsigned bfsDistance(unsigned source, unsigned destination);
 };
 
