@@ -32,6 +32,7 @@ struct edge{
 class AdjListW {
 
 private:
+
     std::vector<std::vector<edge>> adjList;
     const bool isDirected;
     unsigned nodeNumber;
@@ -41,6 +42,8 @@ public:
 
     //constructor
     AdjListW(bool isDirected, unsigned int nodeNumber, unsigned int edgeNumber, std::vector<std::vector<double>> edgeList);
+
+    //Utility
 
     //BFS Algorithms
     std::vector<int> BFS(unsigned source, int returnType);

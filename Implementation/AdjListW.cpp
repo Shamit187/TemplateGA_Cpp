@@ -63,10 +63,10 @@ std::vector<int> AdjListW::DFS(unsigned int source, int returnType) {
     color.resize(nodeNumber, ADJLST_WHITE);
 
     std::vector<int> discover;
-    discover.resize(nodeNumber, 0);
+    discover.resize(nodeNumber, ADJLST_INF);
 
     std::vector<int> finish;
-    finish.resize(nodeNumber, 0);
+    finish.resize(nodeNumber, ADJLST_INF);
 
     std::vector<int> parent;
     parent.resize(nodeNumber, ADJLST_INF);

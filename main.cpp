@@ -9,7 +9,7 @@ int main() {
     for(auto i: output){
         std::cout << i << " ";
     } std::cout << std::endl;
-    output = graph.DFS(0, ADJLST_COLOR);
+    output = graph.DFS(0, ADJLST_DISCOVER);
     for(auto i: output){
         std::cout << i << " ";
     } std::cout << std::endl;
