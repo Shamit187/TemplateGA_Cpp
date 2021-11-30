@@ -42,6 +42,13 @@ struct InvalidBipartite : public std::exception{
     }
 };
 
+struct TopologicalSortUnavailable : public std::exception{
+    const char* what() const throw() override
+    {
+        return "Cycle exists, Topological sort not available";
+    }
+};
+
 
 
 

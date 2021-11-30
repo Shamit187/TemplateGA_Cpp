@@ -60,6 +60,8 @@ public:
 
     //DFS Algorithms
     std::vector<int> DFS(unsigned int source, int returnType);
+    AdjListW DFSTree(unsigned source);
+    std::vector<int> topologicalSort();
 };
 
 

@@ -6,24 +6,15 @@
 
 int main() {
 
-//    AdjListW graph = generateWtGraphFromFile("../Input/input_1.txt",false);
-//    //std::cout << graph.BFSTree(0);
-//
-//    try {
-//        auto set = graph.bipartiteSet();
-//        for(int i = 0; i < 2; i++){
-//            std::cout << "Set " << i << ": \n";
-//            for(auto v: set[i]){
-//                std::cout << v << " ";
-//            }
-//            std::cout << std::endl;
-//        }
-//    }catch(std::exception &e){
-//        std::cout << e.what() << std::endl;
-//    }
-    generateRandomGraph(10, 5, "../Input/input_2.txt");
-    AdjListW graph = generateWtGraphFromFile("../Input/input_2.txt", false);
+    //generateRandomGraph(10, 12, "../Input/input_2.txt");
+
+
+    AdjListW graph = generateWtGraphFromFile("../Input/input_2.txt",true);
     std::cout << graph.isConnected() << std::endl;
+    /*
+    std::cout << graph.BFSTree(0);
+    std::cout << graph.DFSTree(0);
+
     try {
         auto set = graph.bipartiteSet();
         for(int i = 0; i < 2; i++){
@@ -36,6 +27,20 @@ int main() {
     }catch(std::exception &e){
         std::cout << e.what() << std::endl;
     }
+     */
+    /*
+    try{
+        std::vector<int> sortList = graph.topologicalSort();
+        for(auto v: sortList){
+            std::cout << v << " ";
+        }
+        std::cout << std::endl;
+    }catch (std::exception &e){
+        std::cout << e.what() << std::endl;
+    }
+    */
+
+
 
     return 0;
 }

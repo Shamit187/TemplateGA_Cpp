@@ -224,6 +224,84 @@ bool AdjListW::isConnected() {
     return true;
 }
 
+AdjListW AdjListW::DFSTree(unsigned int source) {
+    AdjListW dfsTree(true, nodeNumber, 0, std::vector<std::vector<double>>(0));
+    std::stack<int> vertexStack;
+
+    std::vector<int> color;
+    color.resize(nodeNumber, ADJLST_WHITE);
+
+    vertexStack.push(source);
+    color[source] = ADJLST_GRAY;
+
+    while(!vertexStack.empty()){
+        int v = vertexStack.top(); vertexStack.pop();
+
+        if (color[v] == ADJLST_GRAY){
+
+            color[v] = ADJLST_GREEN;
+            vertexStack.push(v);
+
+            for(auto u: adjList[v]){
+                if(color[u.destination] == ADJLST_WHITE){
+                    color[u.destination] = ADJLST_GRAY;
+                    vertexStack.push(u.destination);
+                    dfsTree.addEdge(v, u.destination, u.weight);
+                }
+            }
+
+        }else if(color[v] == ADJLST_GREEN){
+            color[v] = ADJLST_BLACK;
+        }
+    }
+
+    return dfsTree;
+}
+
+std::vector<int> AdjListW::topologicalSort() {
+    std::vector<int> sortedList;
+    std::stack<int> vertexStack;
+
+    std::vector<int> color;
+    color.resize(nodeNumber, ADJLST_WHITE);
+
+    for(int i = 0; i < nodeNumber; i++){
+        if(color[i] == ADJLST_WHITE){
+            vertexStack.push(i);
+            color[i] = ADJLST_GRAY;
+
+            while(!vertexStack.empty()){
+                int v = vertexStack.top(); vertexStack.pop();
+
+                if (color[v] == ADJLST_GRAY){
+
+                    color[v] = ADJLST_GREEN;
+                    vertexStack.push(v);
+
+                    for(auto u: adjList[v]){
+                        if(color[u.destination] == ADJLST_WHITE){
+                            color[u.destination] = ADJLST_GRAY;
+                            vertexStack.push(u.destination);
+                        }else if(color[u.destination] == ADJLST_GRAY || color[u.destination] == ADJLST_GREEN){
+                            throw TopologicalSortUnavailable();
+                        }
+                    }
+
+                }else if(color[v] == ADJLST_GREEN){
+                    color[v] = ADJLST_BLACK;
+                    sortedList.push_back(v);
+                }
+            }
+        }
+    }
+
+    for(int i = 0; i < nodeNumber/2; i++){
+        std::swap(sortedList[i], sortedList[nodeNumber - i - 1]);
+    }
+
+    return sortedList;
+}
+
 
 
 
