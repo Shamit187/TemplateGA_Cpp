@@ -9,7 +9,7 @@ int main() {
     //generateRandomGraph(6, 20, "../Input/input_2.txt");
 
 
-    AdjListW graph = generateWtGraphFromFile("../Input/input_2.txt",true);
+    AdjListW graph = generateWtGraphFromNonWtFile("../Input/Graph_input.txt",true);
     //std::cout << graph.isConnected() << std::endl;
     /*
     std::cout << graph.BFSTree(0);
@@ -55,6 +55,7 @@ int main() {
     }
      */
 
+    /*
     std::vector<std::vector<int>> SCC = graph.StronglyConnectedComponent();
     for(auto list: SCC){
         for(auto v: list){
@@ -62,7 +63,10 @@ int main() {
         }
         std::cout << std::endl;
     }
+    */
 
+    std::cout << graph.edgeFormatPrintWithoutEdge();
+    std::cout << graph;
 
     return 0;
 }

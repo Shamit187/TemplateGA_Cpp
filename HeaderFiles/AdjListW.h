@@ -62,6 +62,8 @@ public:
     bool edgeExist(unsigned source, unsigned destination);
     double edgeWeight(unsigned source, unsigned destination);
     AdjListW transpose();
+    std::string edgeFormatPrint();
+    std::string edgeFormatPrintWithoutEdge();
 
     //BFS Algorithms
     std::vector<int> BFS(unsigned source, int returnType);

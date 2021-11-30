@@ -121,6 +121,9 @@ void AdjListW::addEdge(unsigned int source, unsigned int destination, double wt)
 }
 
 std::ostream &operator<<(std::ostream &os, const AdjListW &obj) {
+    os << std::endl << "Graph Description" << std::endl;
+    os << "-----------------\n";
+    os << "Node: " << obj.nodeNumber << " Total Edge: " << obj.edgeNumber << std::endl << std::endl;
     for(int i = 0; i < obj.nodeNumber; i++){
         os << "Vertex: " << i << std::endl;
         for(auto v: obj.adjList[i]){
@@ -128,6 +131,7 @@ std::ostream &operator<<(std::ostream &os, const AdjListW &obj) {
         }
         os << std::endl;
     }
+    os << std::endl;
     return os;
 }
 
@@ -436,9 +440,40 @@ std::vector<std::vector<int>> AdjListW::StronglyConnectedComponent() {
     return graph_T.DFSComponent(finishTime);
 }
 
+std::string AdjListW::edgeFormatPrint() {
+    std::string printer;
+    printer += std::to_string(nodeNumber);
+    printer += " ";
+    printer += std::to_string(edgeNumber);
+    printer += "\n";
+    for(auto list: adjList){
+        if(list.empty()) continue;
+        for(auto e: list){
+            printer += std::to_string(e.source);
+            printer += " ";
+            printer += std::to_string(e.destination);
+            printer += " ";
+            printer += std::to_string(e.weight);
+            printer += "\n";
+        }
+    }
+    return printer;
+}
 
-
-
-
-
-
+std::string AdjListW::edgeFormatPrintWithoutEdge() {
+    std::string printer;
+    printer += std::to_string(nodeNumber);
+    printer += " ";
+    printer += std::to_string(edgeNumber);
+    printer += "\n";
+    for(auto list: adjList){
+        if(list.empty()) continue;
+        for(auto e: list){
+            printer += std::to_string(e.source);
+            printer += " ";
+            printer += std::to_string(e.destination);
+            printer += "\n";
+        }
+    }
+    return printer;
+}
