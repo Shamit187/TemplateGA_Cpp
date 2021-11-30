@@ -6,11 +6,11 @@
 
 int main() {
 
-    //generateRandomGraph(10, 12, "../Input/input_2.txt");
+    //generateRandomGraph(6, 20, "../Input/input_2.txt");
 
 
     AdjListW graph = generateWtGraphFromFile("../Input/input_2.txt",true);
-    std::cout << graph.isConnected() << std::endl;
+    //std::cout << graph.isConnected() << std::endl;
     /*
     std::cout << graph.BFSTree(0);
     std::cout << graph.DFSTree(0);
@@ -28,6 +28,7 @@ int main() {
         std::cout << e.what() << std::endl;
     }
      */
+
     /*
     try{
         std::vector<int> sortList = graph.topologicalSort();
@@ -40,6 +41,7 @@ int main() {
     }
     */
 
+    /*
     std::vector<int> direction(10);
     for(int i = 0; i < 10; i++){
         direction[i] = i;
@@ -51,6 +53,16 @@ int main() {
         }
         std::cout << std::endl;
     }
+     */
+
+    std::vector<std::vector<int>> SCC = graph.StronglyConnectedComponent();
+    for(auto list: SCC){
+        for(auto v: list){
+            std::cout << v << " ";
+        }
+        std::cout << std::endl;
+    }
+
 
     return 0;
 }

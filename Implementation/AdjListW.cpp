@@ -357,6 +357,88 @@ std::vector<std::vector<int>> AdjListW::DFSComponent(std::vector<int> DFSDirecti
     return componentList;
 }
 
+std::vector<int> AdjListW::DFSAll(int returnType) {
+    std::vector<int> color;
+    color.resize(nodeNumber, ADJLST_WHITE);
+
+    std::vector<int> discover;
+    discover.resize(nodeNumber, ADJLST_INF);
+
+    std::vector<int> finish;
+    finish.resize(nodeNumber, ADJLST_INF);
+
+    std::vector<int> parent;
+    parent.resize(nodeNumber, ADJLST_INF);
+
+    int time = 0;
+    for(int source = 0; source < nodeNumber; source++){
+        if(color[source] == ADJLST_WHITE){
+            std::stack<int> vertexStack;
+            vertexStack.push(source);
+            color[source] = ADJLST_GRAY;
+            discover[source] = ++time;
+
+            while(!vertexStack.empty()){
+                int v = vertexStack.top(); vertexStack.pop();
+
+                if (color[v] == ADJLST_GRAY){
+
+                    color[v] = ADJLST_GREEN;
+                    vertexStack.push(v);
+
+                    for(auto u: adjList[v]){
+                        if(color[u.destination] == ADJLST_WHITE){
+                            color[u.destination] = ADJLST_GRAY;
+                            discover[u.destination] = ++time;
+                            vertexStack.push(u.destination);
+                            parent[u.destination] = v;
+                        }
+                    }
+
+                }else if(color[v] == ADJLST_GREEN){
+                    color[v] = ADJLST_BLACK;
+                    finish[v] = ++time;
+                }
+            }
+        }
+    }
+
+    switch (returnType) {
+        case ADJLST_COLOR:
+            return color;
+        case ADJLST_DISCOVER:
+            return discover;
+        case ADJLST_FINISH:
+            return finish;
+        case ADJLST_PARENT:
+            return parent;
+        default:
+            return std::vector<int>(0);
+    }
+}
+
+std::vector<std::vector<int>> AdjListW::StronglyConnectedComponent() {
+    std::vector<int> finishTime = DFSAll(ADJLST_FINISH);
+    std::priority_queue<nodeKeySort> Q;
+    for(int i = 0; i < nodeNumber; i++){
+        Q.push({i, finishTime[i]});
+    }
+    for(int i = 0; i < nodeNumber; i++){
+        finishTime[i] = Q.top().node; Q.pop();
+    }
+    /*
+    for(auto v: finishTime){
+        std::cout << v << " ";
+    }std::cout << std::endl;
+    */
+
+    AdjListW graph_T = transpose();
+    return graph_T.DFSComponent(finishTime);
+}
+
+
+
+
 
 
 

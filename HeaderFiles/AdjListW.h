@@ -10,6 +10,7 @@
 #include <stack>
 #include <queue>
 #include <iostream>
+#include <string>
 
 #define ADJLST_WHITE 0
 #define ADJLST_GRAY 1
@@ -30,6 +31,16 @@ struct edge{
     unsigned destination;
     double weight;
 };
+
+struct nodeKeySort{
+    int node;
+    int key;
+
+    bool operator<(const nodeKeySort& rhs) const{
+        return key < rhs.key;
+    }
+};
+
 
 class AdjListW {
 
@@ -60,9 +71,11 @@ public:
 
     //DFS Algorithms
     std::vector<int> DFS(unsigned int source, int returnType);
+    std::vector<int> DFSAll(int returnType);
     AdjListW DFSTree(unsigned source);
     std::vector<int> topologicalSort();
     std::vector<std::vector<int>> DFSComponent(std::vector<int>DFSDirection);
+    std::vector<std::vector<int>> StronglyConnectedComponent();
 };
 
 
