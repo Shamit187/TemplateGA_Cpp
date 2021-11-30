@@ -40,7 +40,17 @@ int main() {
     }
     */
 
-
+    std::vector<int> direction(10);
+    for(int i = 0; i < 10; i++){
+        direction[i] = i;
+    }
+    std::vector<std::vector<int>> componentList = graph.DFSComponent(direction);
+    for(int i = 0; i < componentList.size(); i++){
+        for(auto v: componentList[i]){
+            std::cout << v << " ";
+        }
+        std::cout << std::endl;
+    }
 
     return 0;
 }

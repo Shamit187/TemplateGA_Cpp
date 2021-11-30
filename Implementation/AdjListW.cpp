@@ -302,6 +302,61 @@ std::vector<int> AdjListW::topologicalSort() {
     return sortedList;
 }
 
+std::vector<std::vector<int>> AdjListW::DFSComponent(std::vector<int> DFSDirection) {
+    std::vector<std::vector<int>> componentList;
+    componentList.resize(1, std::vector<int>(0));
+
+    //init
+    std::stack<int> vertexStack;
+
+    std::vector<int> color;
+    color.resize(nodeNumber, ADJLST_WHITE);
+
+    std::vector<int> components;
+    components.resize(nodeNumber, -1);
+    int componentNumber = 0;
+
+    for(auto source: DFSDirection){
+        if(color[source] == ADJLST_WHITE){
+            vertexStack.push(source);
+            color[source] = ADJLST_GRAY;
+
+            while(!vertexStack.empty()){
+                int v = vertexStack.top(); vertexStack.pop();
+
+                if (color[v] == ADJLST_GRAY){
+
+                    color[v] = ADJLST_GREEN;
+                    vertexStack.push(v);
+
+                    for(auto u: adjList[v]){
+                        if(color[u.destination] == ADJLST_WHITE){
+                            color[u.destination] = ADJLST_GRAY;
+                            vertexStack.push(u.destination);
+                        }
+                    }
+
+                }else if(color[v] == ADJLST_GREEN){
+                    color[v] = ADJLST_BLACK;
+                    components[v] = source;
+                }
+            }
+
+            if(componentNumber != 0){
+                componentList.push_back(std::vector<int>(0));
+            }
+            for(int i = 0; i < nodeNumber; i++){
+                if(components[i] == source){
+                    componentList[componentNumber].push_back(i);
+                }
+            }
+            componentNumber++;
+        }
+    }
+
+    return componentList;
+}
+
 
 
 

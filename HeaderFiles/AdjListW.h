@@ -62,6 +62,7 @@ public:
     std::vector<int> DFS(unsigned int source, int returnType);
     AdjListW DFSTree(unsigned source);
     std::vector<int> topologicalSort();
+    std::vector<std::vector<int>> DFSComponent(std::vector<int>DFSDirection);
 };
 
 
