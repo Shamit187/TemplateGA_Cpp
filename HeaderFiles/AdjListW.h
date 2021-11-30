@@ -9,11 +9,13 @@
 #include <vector>
 #include <stack>
 #include <queue>
+#include <iostream>
 
 #define ADJLST_WHITE 0
 #define ADJLST_GRAY 1
 #define ADJLST_BLACK 2
 #define ADJLST_GREEN 3
+#define ADJLST_RED 4
 
 #define ADJLST_INF -1
 
@@ -44,9 +46,16 @@ public:
     AdjListW(bool isDirected, unsigned int nodeNumber, unsigned int edgeNumber, std::vector<std::vector<double>> edgeList);
 
     //Utility
+    void addEdge(unsigned source, unsigned destination, double wt);
+    friend std::ostream& operator<<(std::ostream& os, const AdjListW& obj);
+    bool edgeExist(unsigned source, unsigned destination);
+    double edgeWeight(unsigned source, unsigned destination);
+    AdjListW transpose();
 
     //BFS Algorithms
     std::vector<int> BFS(unsigned source, int returnType);
+    AdjListW BFSTree(unsigned source);
+    std::vector<std::vector<int>> bipartiteSet();
 
     //DFS Algorithms
     std::vector<int> DFS(unsigned int source, int returnType);

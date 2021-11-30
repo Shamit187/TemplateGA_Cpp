@@ -6,6 +6,7 @@
 #define GRAPHMODULEC___ADJMATRIX_H
 
 #include <vector>
+#include <iostream>
 
 class AdjMatrix {
 
@@ -22,6 +23,8 @@ public:
     AdjMatrix(unsigned nodeNumber, unsigned edgeNumber, bool isDirected, std::vector<std::vector<double>> edgeList);
 
     //Utility
+    void addEdge(unsigned source, unsigned destination, double weight);
+    friend std::ostream& operator<<(std::ostream& os, const AdjMatrix& obj);
 
     //BFS
 

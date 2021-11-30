@@ -113,3 +113,109 @@ std::vector<int> AdjListW::DFS(unsigned int source, int returnType) {
             return std::vector<int>(0);
     }
 }
+
+void AdjListW::addEdge(unsigned int source, unsigned int destination, double wt) {
+    adjList[source].push_back(edge{source, destination, wt});
+    if(!isDirected) adjList[destination].push_back(edge{destination, source, wt});
+    edgeNumber++;
+}
+
+std::ostream &operator<<(std::ostream &os, const AdjListW &obj) {
+    for(int i = 0; i < obj.nodeNumber; i++){
+        os << "Vertex: " << i << std::endl;
+        for(auto v: obj.adjList[i]){
+            os << v.destination << "(" << v.weight << ") ";
+        }
+        os << std::endl;
+    }
+    return os;
+}
+
+AdjListW AdjListW::BFSTree(unsigned int source) {
+    AdjListW bfsTree(true, nodeNumber, 0, std::vector<std::vector<double>>(0));
+
+    std::vector<int> color;
+    color.resize(nodeNumber, ADJLST_WHITE);
+
+    color[source] = ADJLST_GRAY;
+
+    std::queue<int> queue;
+    queue.push(source);
+
+    while(!queue.empty()){
+        unsigned v = queue.front(); queue.pop();
+        for(auto u: adjList[v]){
+            if (color[u.destination] == ADJLST_WHITE){
+                bfsTree.addEdge(v, u.destination, u.weight);
+                color[u.destination] = ADJLST_GRAY;
+                queue.push(u.destination);
+            }
+        }
+        color[v] = ADJLST_BLACK;
+    }
+
+    return bfsTree;
+}
+
+bool AdjListW::edgeExist(unsigned int source, unsigned int destination) {
+    for(auto e: adjList[source]){
+        if(e.destination == destination) return true;
+    }
+    return false;
+}
+
+double AdjListW::edgeWeight(unsigned int source, unsigned int destination) {
+    for(auto e: adjList[source]){
+        if(e.destination == destination) return e.weight;
+    }
+    throw EdgeNonExistent();
+}
+
+AdjListW AdjListW::transpose() {
+    if(!isDirected) throw InvalidTranspose();
+    AdjListW transposedGraph(isDirected, nodeNumber, 0, std::vector<std::vector<double>>(0));
+    for(int i = 0; i < nodeNumber; i++){
+        for(auto v: adjList[i]){
+            transposedGraph.addEdge(v.destination, i, v.weight);
+        }
+    }
+    return transposedGraph;
+}
+
+std::vector<std::vector<int>> AdjListW::bipartiteSet() {
+    if(isDirected) throw InvalidBipartite();
+    std::vector<std::vector<int>> set;
+    set.resize(2,std::vector<int>(0));
+
+    unsigned source = 0;
+    std::vector<int> color;
+    color.resize(nodeNumber, ADJLST_WHITE);
+    std::queue<int> queue;
+    for(int source = 0; source < nodeNumber; source++){
+        if(color[source] == ADJLST_WHITE){
+            color[source] = ADJLST_GREEN;
+            queue.push(source);
+            set[0].push_back(source);
+
+            while(!queue.empty()){
+                unsigned v = queue.front(); queue.pop();
+                int colorScheme;
+                if(color[v] == ADJLST_GREEN) colorScheme = ADJLST_RED;
+                else colorScheme = ADJLST_GREEN;
+                for(auto u: adjList[v]){
+                    if (color[u.destination] == ADJLST_WHITE){
+                        color[u.destination] = colorScheme;
+                        queue.push(u.destination);
+                        if(colorScheme == ADJLST_GREEN) set[0].push_back(u.destination);
+                        else set[1].push_back(u.destination);
+                    }if (color[u.destination] != colorScheme) throw InvalidBipartite();
+                }
+            }
+        }
+    }
+    return set;
+}
+
+
+
+
