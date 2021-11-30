@@ -46,3 +46,8 @@ std::ostream &operator<<(std::ostream &os, const AdjMatrix& obj) {
     }
     return os;
 }
+
+bool AdjMatrix::edgeExist(unsigned int source, unsigned int destination) {
+    if(adjMatrix[source][destination] == 0) return false;
+    else return true;
+}

@@ -216,6 +216,14 @@ std::vector<std::vector<int>> AdjListW::bipartiteSet() {
     return set;
 }
 
+bool AdjListW::isConnected() {
+    std::vector<int> result = BFS(0, ADJLST_COLOR);
+    for(auto &v: result){
+        if(v == ADJLST_WHITE)return false;
+    }
+    return true;
+}
+
 
 
 

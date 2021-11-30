@@ -92,16 +92,29 @@ AdjList generateGraphFromFile(const char* _filename){
     return {true, static_cast<unsigned int>(nodeNumber), static_cast<unsigned int>(edgeNumber), edgeList};
 }
 
-void generateRandomGraph(bool isDirected, unsigned nodeNumber, double density, const char* _filename){
+void generateRandomGraph(unsigned nodeNumber, unsigned edgeNumber, const char* _filename){
     std::ofstream writingFile;
     writingFile.open(_filename);
     if(!writingFile) {
         std::cout << "Unable to open file";
         exit(1);
     }
-    AdjListW graph(isDirected, nodeNumber, 0, std::vector<std::vector<double>>(0));
+    writingFile << nodeNumber << " " << edgeNumber << std::endl;
+    AdjMatrix graph(nodeNumber, 0, false, std::vector<std::vector<double>>(0));
 
-    for(int i = 0; i < nodeNumber; i++){
+    srand(time(NULL));
+    int edge = 0;
+    while(edge < edgeNumber){
+        unsigned u = rand() % nodeNumber;
+        unsigned v = rand() % nodeNumber;
+        while(u == v){
+            v = rand() % nodeNumber;
+        }
+        if(!graph.edgeExist(u, v)){
+            graph.addEdge(u, v, 1);
+            writingFile << u << " " << v << " " << (1 + rand()%100 ) / 100.0 << std::endl;
+            edge++;
+        }
     }
 }
 #endif //GRAPHMODULEC___FILEUTILITY_H

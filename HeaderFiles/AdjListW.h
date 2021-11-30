@@ -56,6 +56,7 @@ public:
     std::vector<int> BFS(unsigned source, int returnType);
     AdjListW BFSTree(unsigned source);
     std::vector<std::vector<int>> bipartiteSet();
+    bool isConnected();
 
     //DFS Algorithms
     std::vector<int> DFS(unsigned int source, int returnType);

@@ -25,6 +25,7 @@ public:
     //Utility
     void addEdge(unsigned source, unsigned destination, double weight);
     friend std::ostream& operator<<(std::ostream& os, const AdjMatrix& obj);
+    bool edgeExist(unsigned source, unsigned destination);
 
     //BFS
 
